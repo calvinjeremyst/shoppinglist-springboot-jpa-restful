@@ -55,57 +55,5 @@ public class ShoppingListService
             return false;
         }
     }
-    //Mencari Daftar Belanja berdasarkan Judul
-    @GetMapping("/shoppinglist")
-    public ResponseEntity<List<DaftarBelanja>> findByJudul(@RequestParam String title){
-        try{
-            List<DaftarBelanja> db = new ArrayList<DaftarBelanja>();
-            repo.findByTitle(title).forEach(db::add);
-            if (db.isEmpty()){
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    //Insert Daftar Belanja
-    @PostMapping("shoppinglist")
-    public ResponseEntity<DaftarBelanja> insertDaftarBelanja(@RequestBody DaftarBelanja db){
-        try{
-            DaftarBelanja db2 = repo.save(new DaftarBelanja(db.getJudul(),db.getTanggal(),db.getDaftarBarang()));
-            //DaftarBelanjaDetil dbd2 = repo.save(new DaftarBelanjaDetil(dbd.getNoUrut(),dbd.getNamaBarang(),dbd.getByk(),dbd.getSatuan(),dbd.getMemo()));
-            return new ResponseEntity<>(db2, HttpStatus.CREATED);
-        }catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    //Update Daftar Belanja
-    @PutMapping("shoppinglist/{id}")
-    public ResponseEntity<DaftarBelanja> updateDaftarBelanja(@PathVariable("id") long id,
-                                                             @RequestBody DaftarBelanja db) {
-        Optional<DaftarBelanja> dbData = repo.findById(id);
-        if(dbData.isPresent()) {
-            DaftarBelanja db2 = dbData.get();
-            db2.setJudul(db.getJudul());
-            db.setTanggal(db.getTanggal());
-            return new ResponseEntity<>(repo.save(db2),HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    //Delete Daftar Belanja
-    @DeleteMapping("shoppinglist/{id}")
-    public ResponseEntity<HttpStatus> deleteDaftarBelanja(@PathVariable("id") long id){
-        try{
-            repo.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }
