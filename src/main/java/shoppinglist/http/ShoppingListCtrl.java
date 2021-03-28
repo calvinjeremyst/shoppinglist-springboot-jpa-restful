@@ -105,7 +105,7 @@ public class ShoppingListCtrl
         if(dbData.isPresent()) {
             DaftarBelanja db2 = dbData.get();
             db2.setJudul(db.getJudul());
-            db.setTanggal(db.getTanggal());
+            db2.setTanggal(db.getTanggal());
             return new ResponseEntity<>(repo.save(db2),HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
