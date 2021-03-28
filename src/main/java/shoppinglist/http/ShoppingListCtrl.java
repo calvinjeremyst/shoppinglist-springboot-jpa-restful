@@ -90,7 +90,6 @@ public class ShoppingListCtrl
     public ResponseEntity<DaftarBelanja> insertDaftarBelanja(@RequestBody DaftarBelanja db){
         try{
             DaftarBelanja db2 = repo.save(new DaftarBelanja(db.getJudul(),db.getTanggal(),db.getDaftarBarang()));
-            //DaftarBelanjaDetil dbd2 = repo.save(new DaftarBelanjaDetil(dbd.getNoUrut(),dbd.getNamaBarang(),dbd.getByk(),dbd.getSatuan(),dbd.getMemo()));
             return new ResponseEntity<>(db2, HttpStatus.CREATED);
         }catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
