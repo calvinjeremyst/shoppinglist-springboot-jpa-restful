@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface DaftarBelanjaRepo extends JpaRepository<DaftarBelanja, Long>
 {
-    List<DaftarBelanja> findByTitle(String title);
+    List<DaftarBelanja> findByTitleContaining(String judul);
 }

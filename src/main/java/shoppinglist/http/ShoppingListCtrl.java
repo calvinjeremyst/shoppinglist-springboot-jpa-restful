@@ -72,16 +72,16 @@ public class ShoppingListCtrl
 
     //Mencari Daftar Belanja berdasarkan Judul
     @GetMapping("/shoppinglist")
-    public ResponseEntity<List<DaftarBelanja>> findByJudul(@RequestParam String title){
-        try{
+    public ResponseEntity<List<DaftarBelanja>> findByJudul(@RequestParam String judul) {
+        try {
             List<DaftarBelanja> db = new ArrayList<DaftarBelanja>();
-            repo.findByTitle(title).forEach(db::add);
-            if (db.isEmpty()){
+            repo.findByTitleContaining(judul).forEach(db::add);
+            if (db.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
