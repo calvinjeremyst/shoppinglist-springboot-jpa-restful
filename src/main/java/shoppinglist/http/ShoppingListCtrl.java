@@ -70,6 +70,7 @@ public class ShoppingListCtrl
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data gagal tersimpan");
     }
 
+    //Postman
     //Mencari Daftar Belanja berdasarkan Judul
     @GetMapping("/shoppinglist")
     public ResponseEntity<List<DaftarBelanja>> findByJudul(@RequestParam String judul) {
